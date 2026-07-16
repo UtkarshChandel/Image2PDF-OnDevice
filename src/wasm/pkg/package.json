@@ -1,0 +1,17 @@
+{
+  "name": "image2pdf-image-core",
+  "type": "module",
+  "description": "Browser-safe image normalization for Image2PDF",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "image2pdf_wasm_bg.wasm",
+    "image2pdf_wasm.js",
+    "image2pdf_wasm.d.ts"
+  ],
+  "main": "image2pdf_wasm.js",
+  "types": "image2pdf_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
