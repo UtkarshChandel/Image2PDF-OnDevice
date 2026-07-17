@@ -36,6 +36,8 @@ describe("static Vercel contract", () => {
     )?.value;
 
     expect(csp).toContain("default-src 'self'");
+    expect(csp).toContain("script-src 'self' 'wasm-unsafe-eval'");
+    expect(csp).not.toContain("'unsafe-eval'");
     expect(csp).toContain("worker-src 'self' blob:");
     expect(csp).toContain("connect-src 'self'");
     expect(csp).toContain("object-src 'none'");
