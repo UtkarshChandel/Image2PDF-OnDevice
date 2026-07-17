@@ -2,6 +2,7 @@
 
 import { PDFDocument, rgb } from "pdf-lib";
 
+import { conversionErrorMessage } from "./error-message";
 import type { WorkerRequest, WorkerResponse } from "./protocol";
 
 const A4_PORTRAIT = { width: 595.276, height: 841.89 } as const;
@@ -119,8 +120,7 @@ async function convert(request: Extract<WorkerRequest, { type: "CONVERT" }>): Pr
     ) as ArrayBuffer;
     send({ type: "COMPLETE", jobId: request.jobId, pdf: output }, [output]);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "The PDF could not be created.";
-    send({ type: "ERROR", jobId: request.jobId, message });
+    send({ type: "ERROR", jobId: request.jobId, message: conversionErrorMessage(error) });
   } finally {
     activeJobId = null;
     cancelledJobId = null;
